@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #e0f2fe, #bae6fd); /* سماء زرقاء لطيفة */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* لمنع ظهور شريط التمرير أثناء حركة البالونات */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* لوحة النقاط في الأعلى */
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.score-box {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0369a1;
+}
+
+#start-btn {
+    padding: 10px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #16a34a;
+    transition: transform 0.1s;
+}
+
+#start-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* منطقة اللعب */
+#game-board {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    cursor: crosshair; /* تغيير شكل الفأرة ليصبح كعلامة التصويب */
+}
+
+/* تصميم البالونة الكرتونية */
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 75px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    cursor: pointer;
+    animation: flyUp 4s linear forwards; /* حركة الانطلاق للأعلى */
+}
+
+/* ذيل البالونة الصغير في الأسفل */
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 26px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid inherit; /* يأخذ نفس لون البالونة تلقائياً عبر JS */
+}
+
+/* الأنيماشن الخاص بحركة البالونة من الأسفل إلى الأعلى */
+@keyframes flyUp {
+    0% {
+        bottom: -90px;
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px); /* حركة تموجية خفيفة يميناً ويساراً */
+    }
+    100% {
+        bottom: 105vh;
+        transform: translateX(-20px);
+    }
+}
